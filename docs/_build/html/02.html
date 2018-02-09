@@ -1,0 +1,461 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Node.jsプログラムを書いてみよう &mdash; OPST_intern_2017_hands_on  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="OPST_intern_2017_hands_on  documentation" href="index.html"/>
+        <link rel="next" title="4. ドローンを飛ばしてみよう" href="03.html"/>
+        <link rel="prev" title="2. 開発環境を作ろう" href="01.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> OPST_intern_2017_hands_on
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00.html">1. 全体構成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01.html">2. 開発環境を作ろう</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Node.jsプログラムを書いてみよう</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">3.1. 作業ディレクトリを作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#finddrone-js">3.2. findDrone.jsの作成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#controller-js">3.3. controller.jsの作成</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03.html">4. ドローンを飛ばしてみよう</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04.html">5. 自動操縦でドローンを飛ばしてみよう</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.html">6. お題を元にドローンを飛ばしてみよう</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OPST_intern_2017_hands_on</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>3. Node.jsプログラムを書いてみよう</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/02.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="node-js">
+<h1>3. Node.jsプログラムを書いてみよう<a class="headerlink" href="#node-js" title="Permalink to this headline">¶</a></h1>
+<p>これから、以下の2つのプログラムを作成します</p>
+<ul class="simple">
+<li>findDrone.js　→ドローンのUUID調べるプログラム</li>
+<li>controller.js　→ドローンを実際に操作するプログラム</li>
+</ul>
+<div class="section" id="id1">
+<h2>3.1. 作業ディレクトリを作成<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Desktopに作業ディレクトリを作成します</p>
+<p>cdコマンドでDesktopに移動します</p>
+<p>下記コマンドを実行してください</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>cd Desktop
+</pre></div>
+</div>
+<p>mkdirコマンドでdroneディレクトリを作成して、その中に移動します</p>
+<p>下記コマンドを実行してください</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>mkdir drone
+cd drone
+</pre></div>
+</div>
+<p>このdroneディレクトリ内でプログラムを作っていきましょう</p>
+</div>
+<div class="section" id="finddrone-js">
+<h2>3.2. findDrone.jsの作成<a class="headerlink" href="#finddrone-js" title="Permalink to this headline">¶</a></h2>
+<p>以下のコードをテキストエディタで入力し、「findDrone.js」として保存します。</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+
+<span class="c1">// モジュールの読み込み</span>
+<span class="kr">const</span> <span class="nx">noble</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;noble&#39;</span><span class="p">);</span>
+
+<span class="c1">// 変数の設定</span>
+<span class="kr">const</span> <span class="nx">knownDevices</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="c1">//BLE デバイス検索をする関数</span>
+<span class="kr">const</span> <span class="nx">discovered</span> <span class="o">=</span> <span class="p">(</span><span class="nx">peripheral</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+
+    <span class="kr">const</span> <span class="nx">device</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="nx">peripheral</span><span class="p">.</span><span class="nx">advertisement</span><span class="p">.</span><span class="nx">localName</span><span class="p">,</span>
+        <span class="nx">uuid</span><span class="o">:</span> <span class="nx">peripheral</span><span class="p">.</span><span class="nx">uuid</span><span class="p">,</span>
+        <span class="nx">rssi</span><span class="o">:</span> <span class="nx">peripheral</span><span class="p">.</span><span class="nx">rssi</span>
+    <span class="p">};</span>
+
+    <span class="nx">knownDevices</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">device</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">knownDevices</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span><span class="sb">:</span><span class="si">${</span><span class="nx">device</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb">(</span><span class="si">${</span><span class="nx">device</span><span class="p">.</span><span class="nx">uuid</span><span class="si">}</span><span class="sb">) RSSI</span><span class="si">${</span><span class="nx">device</span><span class="p">.</span><span class="nx">rssi</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="c1">// BLE 検索開始</span>
+<span class="kr">const</span> <span class="nx">scanStart</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">noble</span><span class="p">.</span><span class="nx">startScanning</span><span class="p">();</span>
+    <span class="nx">noble</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;discover&#39;</span><span class="p">,</span> <span class="nx">discovered</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nx">noble</span><span class="p">.</span><span class="nx">state</span> <span class="o">===</span> <span class="s1">&#39;poweredOn&#39;</span><span class="p">){</span>
+    <span class="nx">scanStart</span><span class="p">();</span>
+<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="nx">noble</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;stateChange&#39;</span><span class="p">,</span> <span class="nx">scanStart</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="controller-js">
+<h2>3.3. controller.jsの作成<a class="headerlink" href="#controller-js" title="Permalink to this headline">¶</a></h2>
+<p>以下のコードをテキストエディタで入力し、「controller.js」として保存します。</p>
+<div class="highlight-js"><div class="highlight"><pre><span></span><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+
+<span class="c1">// モジュールの読み込み</span>
+<span class="kd">var</span> <span class="nx">RollingSpider</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;rolling-spider&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">keypress</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;keypress&#39;</span><span class="p">);</span>
+<span class="nx">keypress</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">);</span>
+<span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">setRawMode</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+<span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+
+<span class="c1">// 変数の設定</span>
+<span class="kd">var</span> <span class="nx">ACTIVE</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">STEPS</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">temporal</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;temporal&#39;</span><span class="p">);</span>
+
+<span class="c1">//DronのUUIDに書き換えましょう</span>
+<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RollingSpider</span><span class="p">({</span> <span class="nx">uuid</span><span class="o">:</span> <span class="s2">&quot;*****************&quot;</span><span class="p">});</span>
+
+<span class="c1">// キー操作後に少しのあいだ入力を受け付けないようにする</span>
+<span class="kd">function</span> <span class="nx">cooldown</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">ACTIVE</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">ACTIVE</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">},</span> <span class="nx">STEPS</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="c1">// ドローンとの接続</span>
+<span class="nx">d</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">d</span><span class="p">.</span><span class="nx">setup</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">d</span><span class="p">.</span><span class="nx">flatTrim</span><span class="p">();</span>
+    <span class="nx">d</span><span class="p">.</span><span class="nx">startPing</span><span class="p">();</span>
+    <span class="nx">d</span><span class="p">.</span><span class="nx">flatTrim</span><span class="p">();</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Connected to drone =&gt; &#39;</span><span class="p">,</span> <span class="nx">d</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+    <span class="nx">ACTIVE</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="p">});</span>
+<span class="p">});</span>
+
+<span class="c1">// キーボードからの入力イベント</span>
+<span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keypress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">ch</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;got &quot;keypress&quot; =&gt; &#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">ACTIVE</span> <span class="o">&amp;&amp;</span> <span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// 離陸</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;t&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;takeoff&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">takeOff</span><span class="p">();</span>
+
+    <span class="c1">// 前進</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;forward&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">forward</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="nx">STEPS</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 後退</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;s&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;backward&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">backward</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="nx">STEPS</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 左水平移動</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;tiltLeft&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">tiltLeft</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="nx">STEPS</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 右水平移動</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;d&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;tiltRight&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">tiltRight</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="nx">STEPS</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 上昇</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;up&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;up&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">up</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="nx">STEPS</span> <span class="o">*</span> <span class="mf">2.5</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+
+    <span class="c1">// 下降</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;down&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;down&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">down</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="nx">STEPS</span> <span class="o">*</span> <span class="mf">2.5</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ９０°左旋回</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;turnLeft&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">turnLeft</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="mi">25</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ９０°右旋回</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;right&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;turnRight&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">turnRight</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="mi">25</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 前方宙返り</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;i&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;frontFlip&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">frontFlip</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="nx">STEPS</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 後方宙返り</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;backFlip&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">backFlip</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="nx">STEPS</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 左に宙返り</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;j&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;leftFlip&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">leftFlip</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="nx">STEPS</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 右に宙返り</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;l&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;rightFlip&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">rightFlip</span><span class="p">({</span> <span class="nx">steps</span><span class="o">:</span> <span class="nx">STEPS</span> <span class="p">});</span>
+      <span class="nx">cooldown</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 着陸</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;q&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;land&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">land</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 接続解除</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;disconnect&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">();</span>
+      <span class="nx">process</span><span class="p">.</span><span class="nx">stdin</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+      <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 3秒後に緊急停止</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">key</span><span class="p">.</span><span class="nx">name</span> <span class="o">===</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;emergency&#39;</span><span class="p">);</span>
+      <span class="nx">d</span><span class="p">.</span><span class="nx">emergency</span><span class="p">();</span>
+      <span class="nx">setTimeout</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">();</span>
+      <span class="p">},</span> <span class="mi">3000</span><span class="p">);</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="03.html" class="btn btn-neutral float-right" title="4. ドローンを飛ばしてみよう" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="01.html" class="btn btn-neutral" title="2. 開発環境を作ろう" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, kokichi Saito.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

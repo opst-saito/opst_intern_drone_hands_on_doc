@@ -1,0 +1,366 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>4. ドローンを飛ばしてみよう &mdash; OPST_intern_2017_hands_on  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="OPST_intern_2017_hands_on  documentation" href="index.html"/>
+        <link rel="next" title="5. 自動操縦でドローンを飛ばしてみよう" href="04.html"/>
+        <link rel="prev" title="3. Node.jsプログラムを書いてみよう" href="02.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> OPST_intern_2017_hands_on
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00.html">1. 全体構成</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01.html">2. 開発環境を作ろう</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02.html">3. Node.jsプログラムを書いてみよう</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. ドローンを飛ばしてみよう</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#uuid">4.1. ドローンのUUIDを調べよう</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">4.2. ドローンを操作してみよう</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="04.html">5. 自動操縦でドローンを飛ばしてみよう</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05.html">6. お題を元にドローンを飛ばしてみよう</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OPST_intern_2017_hands_on</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>4. ドローンを飛ばしてみよう</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/03.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>4. ドローンを飛ばしてみよう<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>いよいよ、ドローン飛ばします。ドローンの電源を入れてください。</p>
+<p>電源ボタンを押すとライト色が、赤 → 橙 → 緑　と変わっていきます。ライトが緑色になったら操作可能な状態です。</p>
+<img alt="_images/intern_03_drone_power_on.png" src="_images/intern_03_drone_power_on.png" />
+<div class="section" id="uuid">
+<h2>4.1. ドローンのUUIDを調べよう<a class="headerlink" href="#uuid" title="Permalink to this headline">¶</a></h2>
+<p>findDrone.js　実行してみましょう。</p>
+<p>下記コマンドを実行してください。</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>node findDrone.js
+</pre></div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span> 25:undefined(34942f51a49d43b1adac6e029ba2eb58) RSSI-74
+ 26:undefined(1787e42be209403ba2fde5821d356650) RSSI-78
+ 27:undefined(f34124eb29744001b0994c9b8521fb29) RSSI-70
+ 28:undefined(d1ed53c48f374c83b57e9c64369f94a6) RSSI-84
+ 29:Alta HR(1577e5a201c4458fbeccea0b338902d2) RSSI-64
+ 30:undefined(133c66539db043b6a1c344f060d60103) RSSI-71
+ 31:undefined(678774b28d2f4e528c75e17a067759f2) RSSI-72
+<span class="hll"> 32:Mambo_640552(bcddd2d5f9bb47e7be84ed2e4b3b9361) RSSI-35
+</span> 33:undefined(514f76a1d8e44e46aedd496ca41bfc5c) RSSI-76
+ 34:undefined(7561ff0ec3fd4f7c9d97cd6eff6085b4) RSSI-59
+ 35:undefined(aceb1517cf154ca58cca09e9347dc201) RSSI-77
+ 36:undefined(9c5d9f0e827540bbb30cfa6e799c5b0a) RSSI-72
+</pre></div>
+</div>
+<p>名前が”Mambo_***********”がドローンの名前になります。</p>
+<p>カッコ内に書かれている UUID をコピーしてください。</p>
+<p>見つかったら、control + c で処理をストップさせてください。</p>
+</div>
+<div class="section" id="id2">
+<h2>4.2. ドローンを操作してみよう<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>先ほどのUUIDを使い、controller.js のxxxxxxxxxxxxとなっている部分を書き換えましょう。</p>
+<p>書き換えたら、下記コマンドを実行してください。</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>node controller.js
+</pre></div>
+</div>
+<p>こうなったら成功です。PCとDroneがBluetoothで接続されました。</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>Connected to drone =&gt; XXXXXX
+</pre></div>
+</div>
+<p>あとはキーボードで以下のアサインされているキーを押せば操作できます。</p>
+<blockquote>
+<div><p>操縦方法（キーアサイン)</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="26%" />
+<col width="64%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">キー</th>
+<th class="head">動作</th>
+<th class="head">メソッド</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>t</td>
+<td>離陸</td>
+<td>d.takeOff()</td>
+</tr>
+<tr class="row-odd"><td>w</td>
+<td>前進</td>
+<td>d.forward({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-even"><td>s</td>
+<td>後退</td>
+<td>d.backward({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-odd"><td>a</td>
+<td>左水平移動</td>
+<td>d.tiltLeft({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-even"><td>d</td>
+<td>右水平移動</td>
+<td>d.tiltRight({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-odd"><td>↑</td>
+<td>上昇</td>
+<td>d.up({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-even"><td>↓</td>
+<td>下降</td>
+<td>d.down({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-odd"><td>←</td>
+<td>左旋回</td>
+<td>d.turnLeft({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-even"><td>→</td>
+<td>右旋回</td>
+<td>d.turnRight({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-odd"><td>i</td>
+<td>前方宙返り</td>
+<td>d.frontFlip({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-even"><td>k</td>
+<td>後方宙返り</td>
+<td>d.backFlip({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-odd"><td>j</td>
+<td>左に宙返り</td>
+<td>d.leftFlip({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-even"><td>l</td>
+<td>右に宙返り</td>
+<td>d.rightFlip({ steps: 1〜100 })</td>
+</tr>
+<tr class="row-odd"><td>q</td>
+<td>着陸</td>
+<td>d.land()</td>
+</tr>
+<tr class="row-even"><td>x</td>
+<td>接続解除</td>
+<td>d.disconnect()</td>
+</tr>
+<tr class="row-odd"><td>m</td>
+<td>緊急停止</td>
+<td>d.emergency()</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><strong>宙返りは行う場合は、ドローンからアクセサリーを外してください！</strong></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="04.html" class="btn btn-neutral float-right" title="5. 自動操縦でドローンを飛ばしてみよう" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="02.html" class="btn btn-neutral" title="3. Node.jsプログラムを書いてみよう" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, kokichi Saito.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+自動操縦でドローンを飛ばしてみよう
+==================================================
+
+これから、ドローンを自動操縦するプログラムを作成します
+
+autoPilotメソッドの追加
+-------------------------------------------
+
+以下のコードを「controller.js」追加します。
+
+.. code-block:: js
+
+  // 自動操縦のキュー
+  function autoPilot() {
+
+      temporal.queue([
+
+      　 // ５秒後に離陸
+        {
+          delay: 5000,
+          task: function () {
+            d.takeOff();
+            d.flatTrim();
+          }
+        },
+
+        // 3秒後に前進
+        {
+          delay: 3000,
+          task: function () {
+            d.forward({steps: 20});
+          }
+        },
+
+        // ５秒後に着陸
+        {
+          delay: 5000,
+          task: function () {
+            d.land();
+          }
+        },
+
+        // ５秒後に接続解除
+        {
+          delay: 5000,
+          task: function () {
+            d.disconnect();
+            console.log('Disconnect!!');
+            temporal.clear();
+            process.exit(0);
+          }
+        }
+      ]);
+  }
+
+次に以下のコードを追加します。
+このコードはキーボードからの入力を受けるため process.stdin.on('keypress', function (ch, key) {} の中に追加してください。
+
+.. code-block:: js
+
+  // 自動操縦
+  else if (key.name === 'b') {
+    console.log('Auto Pilot Start!!');
+    autoPilot();
+  }
+
+
+追加したら、下記コマンドを実行し、キーボードの”b”を押してみましょう。
+
+.. code-block:: none
+
+  node controller.js
